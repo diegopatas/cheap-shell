@@ -1,29 +1,43 @@
 #include "../incl/minishell.h"
+#include <stdlib.h>
 
-char	**str_parse(char *exp_input)
+int	main(int argc, char *argv[], char *env[])
 {
-	char **trim;
-	trim = ft_split(exp_input, ' ');
-	ft_printf("\n1: %s\n", trim[0]);
-	ft_printf("2: %s\n", trim[1]);
-	return trim;
-}
+	char	*user_input;
+	char	**aux;
+	t_ds	*ds;
 
-int	main(void)
-{
-	char *user_input;
-	char *exp_input;
-
-	exp_input = "test";
-	while (1)
+	user_input = NULL;
+	ds = NULL;
+	ds = ds_create(ds);
+	if (argc == 1) 
 	{
-		ft_printf("minishell$ ");
-		user_input = readline("");
-		if (ft_strnstr(user_input, exp_input, ft_strlen(exp_input)))
+		while (1)
 		{
-			cmd_run(exp_input, exp_input);
-			break ;
+			user_input = readline("minishell$ ");
+			aux = input_split(user_input);
+			ds->cmd = aux[0];
+			ds->arg = aux[1];
+			ds->env = env;
+			if (builtin_check(ds))
+			{
+				builtin_run(ds);
+				break ;
+			}
+			else if (ds->cmd != NULL)
+			{
+				cmd_run(ds);
+				break ;
+
+			}
+			ft_printf("Panic! Command \"%s\" is invalid...\nTry: \"echo\"\n", ds->cmd[0]);
 		}
-		ft_printf("Error: Invalid command...\nTry: cat echoed.txt\n");
 	}
+	else 
+		ft_printf("Panic! %s has an invalid number of arguments\n", argv[0]);
+		
+	free(ds->cmd);
+	free(ds->arg);
+	ds = ds_destroy(ds);
+	return (0);
 }

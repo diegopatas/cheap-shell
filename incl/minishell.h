@@ -15,6 +15,7 @@
 
 // allowed libraries
 # include "../lib/libft.h"
+# include "minishell_temp.h"
 # include <readline/readline.h>
 # include <signal.h>
 # include <string.h>
@@ -25,6 +26,4 @@
 #define READ_END 0 
 #define WRITE_END 1
 
-char	**str_parse(char *exp_input);
-int	cmd_run(char *root, char *input);
 #endif
