@@ -19,7 +19,7 @@ int	main(int argc, char *argv[], char *env[])
 			ds->cmd = aux[0];
 			ds->arg = aux[1];
 			ds->env = env;
-			if (builtin_check(ds))
+			if (builtin_check(ds->cmd))
 			{
 				builtin_run(ds);
 				break ;

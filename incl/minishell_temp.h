@@ -11,7 +11,7 @@ typedef struct s_ds {
 } t_ds;
 
 char	**input_split(char *input);
-bool	builtin_check(t_ds *ds);
+bool	builtin_check(char *cmd);
 int	builtin_run(t_ds *ds);
 int	cmd_run(t_ds *ds);
 int 	cmd_echo(t_ds *ds);

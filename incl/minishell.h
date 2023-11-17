@@ -16,6 +16,7 @@
 // allowed libraries
 # include "../lib/libft.h"
 # include "minishell_temp.h"
+# include "minishell_ads.h"
 # include <readline/readline.h>
 # include <signal.h>
 # include <string.h>
