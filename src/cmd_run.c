@@ -13,11 +13,11 @@ int	operator_eval(const char *operator)
 	return (0);
 }
 
-int	cmd_run(t_ds *ds)
+int	cmd_run(t_cmd *cmd)
 {
 	char *seq = ">|||";
 
-	(void)ds;
+	(void)cmd;
 	while (*seq) {
 		printf("Res: %c \n", *seq);
 		seq++;

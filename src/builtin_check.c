@@ -1,6 +1,6 @@
 #include "../incl/minishell.h"
 
-bool	builtin_check(char *cmd)
+bool	builtin_check(const char *cmd)
 {
 	if (ft_strncmp("echo", cmd, ft_strlen(cmd)) == 0)
 		return true;

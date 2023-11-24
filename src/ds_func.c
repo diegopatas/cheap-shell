@@ -1,17 +1,27 @@
 #include "../incl/minishell.h"
 #include <stdlib.h>
+#include <unistd.h>
 
-t_ds	*ds_destroy(t_ds *ds)
+t_cmd	*ds_destroy(t_cmd *cmd)
 {
-	free(ds);
-	ds = NULL;
-	return (ds);
+	free(cmd->name);
+	free(cmd->arg);
+	free(cmd);
+	cmd = NULL;
+	return (cmd);
 }
 
-t_ds	*ds_create(t_ds *ds)
+t_cmd	*ds_create(t_cmd *cmd)
 {
-	ds = (t_ds *)malloc(sizeof(t_ds));
-	ds->cmd = NULL;
-	ds->arg = NULL;
-	return (ds);
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	cmd->name = "echo";
+	cmd->arg = NULL;
+	cmd->type = NULL;
+	cmd->env = NULL;
+	cmd->fd = 1;
+	cmd->vec = (char **)malloc(3 * sizeof(char *));
+	cmd->vec[0] = "echo";
+	cmd->vec[1] = "txt";
+	cmd->vec[2] = NULL;
+	return (cmd);
 }

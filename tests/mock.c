@@ -1,4 +1,4 @@
-#include "tests.h"
+#include "tester.h"
 
 int	*esp;
 int	output;

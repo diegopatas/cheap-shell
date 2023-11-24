@@ -1,5 +1,5 @@
-LINKER			= gcc -g3
-COMPILER		= $(LINKER) -c 
+LINKER			= gcc
+COMPILER		= $(LINKER) -c -g3
 
 REMOVE			= rm
 REMOVE_FORCE		= $(REMOVE) -rf
@@ -23,7 +23,7 @@ PATH_TESTS		= tests
 
 SEARCH_INCL		= -I. -I$(PATH_INCL) -I$(PATH_LIBFT)
 
-MAIN			= $(PATH_SRC)/main_dev.c
+MAIN			= $(PATH_SRC)/main.c
 FILE_SRC		= $(filter-out $(MAIN), $(wildcard $(PATH_SRC)/*.c))
 FILE_HEADER		= $(PATH_INCL)/minishell.h
 FILE_OBJ		= $(FILE_SRC:$(PATH_SRC)/%.c=$(PATH_OBJ)/%.o)
@@ -31,7 +31,7 @@ LINK_READLINE		= -lreadline
 
 LIBFT			= $(PATH_LIBFT)/libft.a
 
-NAME			= minishell
+NAME			= dev
 
 all: $(NAME)
 
@@ -69,8 +69,8 @@ test: all
 	@$(MAKE) -C $(PATH_TESTS) all
 	@echo "Compiling libft -> OK"
 
-dev:
-	$(MAKE) -f Makedev
+# dev:
+# 	$(MAKE) -f Makedev
 
 $(LIBFT):
 	@$(MAKE) -C $(PATH_LIBFT) all
