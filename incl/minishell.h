@@ -37,7 +37,8 @@ typedef struct s_cmd {
 
 int	cheapshell(char *input);
 t_cmd	*ds_destroy(t_cmd *cmd);
-t_cmd	*ds_create(t_cmd *cmd);
+t_cmd	*ds_create(void);
+char	**vec_create(int size);
 
 char	**input_split(char *input);
 
@@ -48,7 +49,7 @@ int	exit_run(void);
 int	unset_run(void);
 int	cd_run(t_cmd *cmd);
 int	env_run(void);
-int	pwd_run(void);
+int	pwd_run(t_cmd *cmd);
 int	export_run(t_cmd *cmd);
 
 int	cmd_run(t_cmd *cmd);

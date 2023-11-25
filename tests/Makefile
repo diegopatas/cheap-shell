@@ -44,7 +44,7 @@ LINK_READLINE	= -lreadline
 
 all: $(NAME)
 
-$(NAME): $(LIBFT_ALL) $(FILE_OBJ) $(HEADER) $(HEADER_UNIT) $(HEADER_FIXTURE) $(HEADER_MEM)
+$(NAME): $(LIBFT) $(FILE_OBJ) $(HEADER) $(HEADER_UNIT) $(HEADER_FIXTURE) $(HEADER_MEM)
 	$(LINKER) $(FLAG) $(FILE_UNITY) $(FILE_FIXTURE) $(FILE_MEM) $(FILE_OBJ) $(SEARCH_INCL) $(LIBFT) $(LINK_READLINE) -o $@
 	@echo "Compile tester -> OK"
 
@@ -75,7 +75,7 @@ leak: all clean
 run: all clean
 	./$(NAME)
 
-$(LIBFT_ALL):
+$(LIBFT):
 	@$(MAKE) -C $(PATH_LIBFT) all
 
 $(LIBFT_CLEAN):

@@ -1,9 +1,9 @@
 #include "../incl/minishell.h"
 
-int pwd_run(void)
+int pwd_run(t_cmd *cmd)
 {
 	char *pwd = getcwd(NULL, 256);
-	ft_printf("%s\n", pwd);
+	ft_putstr_fd(pwd, cmd->fd);
 	free(pwd);
 	return (0);
 }

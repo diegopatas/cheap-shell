@@ -32,6 +32,7 @@ LINK_READLINE		= -lreadline
 LIBFT			= $(PATH_LIBFT)/libft.a
 
 NAME			= minishell
+DEV			= dev
 
 all: $(NAME)
 
@@ -50,7 +51,7 @@ clean: $(LIBFT_CLEAN)
 	@echo "Clean objects -> OK"
 
 fclean: clean
-	@$(REMOVE_FORCE) $(NAME)
+	@$(REMOVE_FORCE) $(NAME) $(DEV)
 	@$(MAKE) -C $(PATH_LIBFT) fclean
 	@echo "Fclean project -> OK"
 
@@ -70,7 +71,7 @@ test: all
 	@echo "Compiling libft -> OK"
 
 dev:
-	$(MAKE) -f Makedev
+	$(MAKE) -f Makefile_dev
 
 $(LIBFT):
 	@$(MAKE) -C $(PATH_LIBFT) all

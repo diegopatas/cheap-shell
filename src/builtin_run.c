@@ -12,7 +12,7 @@ int	builtin_run(t_cmd *cmd)
 	if (builtin_match("cd", cmd->name))
 		return cd_run(cmd);
 	if (builtin_match("pwd", cmd->name))
-		return pwd_run();
+		return pwd_run(cmd);
 	if (builtin_match("export", cmd->name))
 		return export_run(cmd);
 	if (builtin_match("unset", cmd->name))

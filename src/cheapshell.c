@@ -8,7 +8,7 @@ int	cheapshell(char *input)
 
 	cmd = NULL;
 	aux = input_split(input);
-	cmd = ds_create(cmd);
+	cmd = ds_create();
 	cmd->name = aux[0];
 	cmd->arg = aux[1];
 	if (builtin_check(cmd->name))

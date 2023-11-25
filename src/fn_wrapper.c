@@ -5,21 +5,19 @@ static void	fd_close(int pipedes[]) {
 	close(pipedes[WRITE_EDGE]);
 	return;
 }
-// static	void	run(char *str, size_t len) {
-// 	// write(STDOUT_FILENO, &str[0], len);
-// 	ft_putstr_fd(str, STDOUT_FILENO);
-// 	return;
-// }
-char	*buf_load(t_cmd *cmd, size_t len) 
+
+char	*buf_load(size_t len) 
 {
 	char	*buf;
 
+	if (len == 0)
+		len = 255;
 	buf = NULL;
 	buf = (char *)malloc(sizeof(len + 1));
-	ft_strlcpy(buf, cmd->arg, len);
 	buf[len] = '\0';
 	return (buf);
 }
+
 char	*fn_wrapper(t_cmd *cmd, int (*fn)())
 {
 	char	*buf;
@@ -28,7 +26,7 @@ char	*fn_wrapper(t_cmd *cmd, int (*fn)())
 	int	pipedes[2];
 
 	len = ft_strlen(cmd->arg);
-	buf = buf_load(cmd, len);
+	buf = buf_load(len);
 	pipe(pipedes);
 	pid = fork();
 	if (pid == 0) {

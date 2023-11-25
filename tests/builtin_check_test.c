@@ -2,12 +2,12 @@
 #include "Unity/src/unity.h"
 #include "tester.h"
 
-TEST_GROUP(builtin_check);
+TEST_GROUP(builtin_check_test);
 
-TEST_SETUP(builtin_check) {
+TEST_SETUP(builtin_check_test) {
 }
 
-TEST_TEAR_DOWN(builtin_check) {
+TEST_TEAR_DOWN(builtin_check_test) {
 }
 
 void	valid(const char *given) {
@@ -15,7 +15,7 @@ void	valid(const char *given) {
 	return;
 }
 
-TEST(builtin_check, check_true) {
+TEST(builtin_check_test, check_true) {
 	valid("echo");
 	valid("cd");
 	valid("pwd");
@@ -25,6 +25,6 @@ TEST(builtin_check, check_true) {
 	valid("env");
 }
 
-TEST_GROUP_RUNNER(builtin_check) {
-	RUN_TEST_CASE(builtin_check, check_true);
+TEST_GROUP_RUNNER(builtin_check_test) {
+	RUN_TEST_CASE(builtin_check_test, check_true);
 }
