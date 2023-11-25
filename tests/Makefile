@@ -1,6 +1,9 @@
 LINKER		= gcc
 COMPILER	= $(LINKER) -c
-FLAGS_C		= -Wall -Wextra -Werror
+FLAG		= -Wall -Wextra -Werror
+FLAG_LEAK	= --leak-check=full --show-leak-kinds=all --track-origins=yes -s
+
+VAL_MEMCHECK	= valgrind
 
 REMOVE		= rm
 REMOVE_FORCE	= $(REMOVE) -rf
@@ -10,44 +13,50 @@ COMPILER	+= -g3
 endif
 
 # DIRECTORIES
-DIR_ROOT	= ..
-DIR_SRC		= $(DIR_ROOT)/src
-DIR_TEST	= $(DIR_ROOT)/tests
-DIR_INCL	= $(DIR_ROOT)/lib
-DIR_UNIT	= $(DIR_ROOT)/tests/Unity
-# UNIT DIRECTORIES
-DIR_SRC_UNIT	= $(DIR_UNIT)/src
-DIR_FIXT_UNIT	= $(DIR_UNIT)/extras/fixture/src
-DIR_MEM_UNIT	= $(DIR_UNIT)/extras/memory/src
+PATH_SRC	= ../src
+PATH_INCL	= ../incl
+PATH_TEST	= ../tests
+PATH_LIBFT	= ../lib
+PATH_UNITY	= ../tests/Unity/src
+PATH_FIXTURE	= ../tests/Unity/extras/fixture/src
+PATH_MEM	= ../tests/Unity/extras/memory/src
+
 # FILES
-PATH_INCL	= -I. -I$(DIR_INCL) -I$(DIR_SRC_UNIT) -I$(DIR_FIXT_UNIT) -I$(DIR_MEM_UNIT) 
-FILE_HEADER	= tests.h
-FILE_HEADER_UNIT	= $(DIR_SRC_UNIT)/unity.h
-UNIT_FIXT_HEAD	= $(DIR_FIXT_UNIT)/unity_fixture.h
-FILE_SRC	= $(filter-out %main.c,  $(wildcard $(DIR_SRC)/*c))
-FILE_SRC	+= $(wildcard $(DIR_TEST)/tests/*c)
+SEARCH_INCL	= -I. -I$(PATH_INCL) -I$(PATH_LIBFT) -I$(PATH_UNITY) -I$(PATH_FIXTURE) -I$(PATH_MEM) 
+HEADER		= tester.h
+HEADER_UNIT	= $(PATH_UNITY)/unity.h
+HEADER_FIXTURE	= $(PATH_FIXTURE)/unity_fixture.h
+HEADER_MEM	= $(PATH_MEM)/unity_memory.h
+
+MAIN		= $(PATH_SRC)/main.c $(PATH_SRC)/main_dev.c
+FILE_SRC	= $(filter-out $(MAIN),  $(wildcard $(PATH_SRC)/*c))
+FILE_SRC	+= $(wildcard $(PATH_TEST)/*c)
 # FILE_SRC	+= $(subst main.c, tests.c, $(FILE_SRC))
 FILE_OBJ	= $(FILE_SRC:%.c=%.o)
 
-FILE_SRC_UNIT	= $(DIR_SRC_UNIT)/unity.c 
-FILE_FIXT_UNIT	= $(DIR_FIXT_UNIT)/unity_fixture.c 
+FILE_UNITY	= $(PATH_UNITY)/unity.c 
+FILE_FIXTURE	= $(PATH_FIXTURE)/unity_fixture.c 
+FILE_MEM	= $(PATH_MEM)/unity_memory.c
  
 NAME		= tester 
-# LIBFT		= ../libraries/libft/libft.a
+LIBFT		= $(PATH_LIBFT)/libft.a
+LINK_READLINE	= -lreadline
 
 all: $(NAME)
 
-$(NAME): $(FILE_OBJ) $(FILE_HEADER)
-	$(LINKER) $(FLAGS_C) $(FILE_SRC_UNIT) $(FILE_FIXT_UNIT) $(FILE_OBJ) $(PATH_INCL) -o $@
+$(NAME): $(LIBFT) $(FILE_OBJ) $(HEADER) $(HEADER_UNIT) $(HEADER_FIXTURE) $(HEADER_MEM)
+	$(LINKER) $(FLAG) $(FILE_UNITY) $(FILE_FIXTURE) $(FILE_MEM) $(FILE_OBJ) $(SEARCH_INCL) $(LIBFT) $(LINK_READLINE) -o $@
+	@echo "Compile tester -> OK"
 
-%.o: %.c $(FILE_HEADER)
-	$(COMPILER) $(PATH_INCL) $< -o $@
+%.o: %.c $(HEADER) $(HEADER_UNIT) $(HEADER_FIXTURE) $(HEADER_MEM)
+	$(COMPILER) $(SEARCH_INCL) $< -o $@
 
-clean:
-	$(REMOVE_FORCE) $(FILE_OBJ)
 
-fclean: clean
-	$(REMOVE_FORCE) $(NAME)
+clean: $(LIBFT_CLEAN)
+	@$(REMOVE_FORCE) $(FILE_OBJ)
+
+fclean: $(LIBFT_FCLEAN) clean
+	@$(REMOVE_FORCE) $(NAME)
 
 re: fclean all
 
@@ -56,5 +65,23 @@ debug:
 
 test: all clean
 	./$(NAME)
+
+test_v: all clean
+	./$(NAME) -v
+
+leak: all clean
+	$(VAL_MEMCHECK) $(FLAG_LEAK) ./$(NAME)
+
+run: all clean
+	./$(NAME)
+
+$(LIBFT):
+	@$(MAKE) -C $(PATH_LIBFT) all
+
+$(LIBFT_CLEAN):
+	@$(MAKE) -C $(PATH_LIBFT) clean
+
+$(LIBFT_FCLEAN):
+	@$(MAKE) -C $(PATH_LIBFT) fclean
 
 .PHONY: all clean fclean re debug test
