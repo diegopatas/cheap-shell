@@ -32,7 +32,6 @@ LINK_READLINE		= -lreadline
 LIBFT			= $(PATH_LIBFT)/libft.a
 
 NAME			= minishell
-DEV			= dev
 
 all: $(NAME)
 

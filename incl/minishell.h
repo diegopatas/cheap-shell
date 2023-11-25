@@ -57,4 +57,11 @@ int	cmd_run(t_cmd *cmd);
 char	*fn_wrapper(t_cmd *cmd, int (*fn)());
 int	fn_execv(t_cmd *cmd);
 
-#endif
+char	**str_parse(char *exp_input);
+
+// EXECUTION FUNCTIONS
+int	cmd_run(char *root, char *input);
+int	cmd_run_pipe(int cmdid);
+int	cmd_run_redirect(void);
+
+# endif

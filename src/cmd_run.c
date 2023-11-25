@@ -1,15 +1,11 @@
 #include "../incl/minishell.h"
 
-// char **arr;
-// arr[0] = "/bin/cat";
-// arr[1] = "test.txt";
-// arr[2] = NULL;
-//
-
-int	operator_eval(const char *operator)
+static int	operator_eval(const char *operator)
 {
 	if (ft_strncmp(operator, ">", 1))
-		return (1);
+		return (OPER_WRITE);
+	if (ft_strncmp(operator, "|", 1))
+		return (OPER_PIPE);
 	return (0);
 }
 
@@ -18,8 +14,13 @@ int	cmd_run(t_cmd *cmd)
 	char *seq = ">|||";
 
 	(void)cmd;
+	// char *target = "cat echoed.txt > void.txt | sort | tail -n 3 | grep pirate";
+
 	while (*seq) {
-		printf("Res: %c \n", *seq);
+		if (operator == OPER_WRITE)
+			cmd_run_redirect();
+		else if (operator == OPER_PIPE)
+			cmd_run_pipe(aux_pipe);
 		seq++;
 	}
 	return (0);
