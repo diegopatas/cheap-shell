@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   print_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/06/26 06:30:54 by ddiniz           ###   ########.fr       */
+/*   Created: 2022/06/10 22:50:17 by ddiniz            #+#    #+#             */
+/*   Updated: 2022/06/11 17:46:15 by ddiniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../lib/libft.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <string.h>
-
-typedef struct s_tree 
+int	print_base(long long int n, int sign, char *base)
 {
-	int value;
-	int count;
-	struct s_tree *left;
-	struct s_tree *right;
-} t_tree;
+	char	*str;
+	int		len;
 
-/* AUXILIAR FUNCTIONS */
-/* SIGNAL FUNCTIONS */
-void	signals_init(void);
-void	abstree_init(void);
-
-#endif
+	len = 0;
+	str = ft_itoag(n, sign, base);
+	if (str != NULL)
+	{
+		len = print_str(str);
+		free(str);
+	}
+	return (len);
+}

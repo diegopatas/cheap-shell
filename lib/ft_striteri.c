@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/06/26 06:30:54 by ddiniz           ###   ########.fr       */
+/*   Created: 2022/04/20 09:15:36 by ddiniz            #+#    #+#             */
+/*   Updated: 2022/04/26 16:03:53 by ddiniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdlib.h>
+#include "libft.h"
 
-# include "../lib/libft.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <string.h>
-
-typedef struct s_tree 
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int value;
-	int count;
-	struct s_tree *left;
-	struct s_tree *right;
-} t_tree;
+	unsigned int	index_s;
+	size_t			len_s;
 
-/* AUXILIAR FUNCTIONS */
-/* SIGNAL FUNCTIONS */
-void	signals_init(void);
-void	abstree_init(void);
-
-#endif
+	len_s = ft_strlen(s);
+	index_s = 0;
+	while (index_s < len_s)
+	{
+		f(index_s, s + index_s);
+		index_s++;
+	}
+}

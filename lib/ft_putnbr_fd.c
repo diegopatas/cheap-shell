@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/06/26 06:30:54 by ddiniz           ###   ########.fr       */
+/*   Created: 2022/04/20 09:21:24 by ddiniz            #+#    #+#             */
+/*   Updated: 2022/04/29 16:43:40 by ddiniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <unistd.h>
+#include "libft.h"
 
-# include "../lib/libft.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <string.h>
+#include "libft.h"
 
-typedef struct s_tree 
+void	ft_putnbr_fd(int n, int fd)
 {
-	int value;
-	int count;
-	struct s_tree *left;
-	struct s_tree *right;
-} t_tree;
+	unsigned int	aux;
 
-/* AUXILIAR FUNCTIONS */
-/* SIGNAL FUNCTIONS */
-void	signals_init(void);
-void	abstree_init(void);
-
-#endif
+	aux = n;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		aux = (aux * (-1));
+	}
+	if (aux >= 10)
+		ft_putnbr_fd((aux / 10), fd);
+	ft_putchar_fd(((aux % 10) + 48), fd);
+}

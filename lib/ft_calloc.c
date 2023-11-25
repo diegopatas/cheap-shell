@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/06/26 06:30:54 by ddiniz           ###   ########.fr       */
+/*   Created: 2022/04/13 23:09:47 by ddiniz            #+#    #+#             */
+/*   Updated: 2022/04/29 14:38:24 by ddiniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include <stdlib.h>
+#include "libft.h"
 
-# include "../lib/libft.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <string.h>
-
-typedef struct s_tree 
+void	*ft_calloc(size_t nelem, size_t elsize)
 {
-	int value;
-	int count;
-	struct s_tree *left;
-	struct s_tree *right;
-} t_tree;
+	void	*ptr;
+	size_t	max_space;
 
-/* AUXILIAR FUNCTIONS */
-/* SIGNAL FUNCTIONS */
-void	signals_init(void);
-void	abstree_init(void);
-
-#endif
+	max_space = nelem * elsize;
+	if (nelem != 0 && (max_space / nelem) != elsize)
+		return (0);
+	ptr = malloc(nelem * elsize);
+	if (!ptr)
+		return (0);
+	ft_bzero(ptr, nelem * elsize);
+	return (ptr);
+}

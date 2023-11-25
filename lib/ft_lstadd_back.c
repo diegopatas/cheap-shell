@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddiniz <ddiniz@student.42sp.org.br>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:58:57 by ddiniz            #+#    #+#             */
-/*   Updated: 2023/06/26 06:30:54 by ddiniz           ###   ########.fr       */
+/*   Created: 2022/04/27 10:25:17 by ddiniz            #+#    #+#             */
+/*   Updated: 2022/04/29 10:22:45 by ddiniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "../lib/libft.h"
-# include <readline/readline.h>
-# include <signal.h>
-# include <string.h>
-
-typedef struct s_tree 
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int value;
-	int count;
-	struct s_tree *left;
-	struct s_tree *right;
-} t_tree;
+	t_list	*aux;
 
-/* AUXILIAR FUNCTIONS */
-/* SIGNAL FUNCTIONS */
-void	signals_init(void);
-void	abstree_init(void);
-
-#endif
+	aux = *lst;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	aux = ft_lstlast(aux);
+	aux->next = new;
+}

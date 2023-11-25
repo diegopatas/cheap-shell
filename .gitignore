@@ -1,7 +1,7 @@
 # ========= [ FOLDERS ] =========
 
 /obj
-/tests
+# /tests
 /testera
 /testerb
 
@@ -9,7 +9,7 @@
 
 *.o
 *.a
-*.md
+# *.md
 *.out
 gdb*
 minishell
