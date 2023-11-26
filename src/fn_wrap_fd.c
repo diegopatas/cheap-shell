@@ -18,7 +18,7 @@ char	*buf_load(size_t len)
 	return (buf);
 }
 
-char	*fn_wrapper(t_cmd *cmd, int (*fn)())
+char	*fn_wrap_fd(t_cmd *cmd, int (*fn)())
 {
 	char	*buf;
 	size_t	len; 

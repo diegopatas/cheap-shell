@@ -15,6 +15,7 @@
 
 // allowed libraries
 # include "../lib/libft.h"
+# include "../incl/structs.h"
 # include <readline/readline.h>
 # include <signal.h>
 # include <string.h>
@@ -26,42 +27,38 @@
 #define READ_EDGE 0
 #define WRITE_EDGE 1
 
-typedef struct s_cmd {
-	char *name;
-	char *arg;
-	char *type;
-	char **env;
-	char **vec;
-	int  fd;
-}	t_cmd;
-
-int	cheapshell(char *input);
-t_cmd	*ds_destroy(t_cmd *cmd);
-t_cmd	*ds_create(void);
-char	**vec_create(int size);
-
-char	**input_split(char *input);
+int	shell_repl(t_sh *shell);
+t_sh	*shell_load(void);
 
 bool	builtin_check(const char *cmd);
-int	builtin_run(t_cmd *cmd);
-int	echo_run(t_cmd *cmd);
-int	exit_run(void);
-int	unset_run(void);
-int	cd_run(t_cmd *cmd);
-int	env_run(void);
-int	pwd_run(t_cmd *cmd);
-int	export_run(t_cmd *cmd);
+int	builtin_exec(t_cmd *cmd);
+int	cmd_cd(t_cmd *cmd);
+int	cmd_echo(t_cmd *cmd);
+int	cmd_export(t_cmd *cmd);
+int	cmd_unset(void);
+int	cmd_pwd(t_cmd *cmd);
+int	cmd_exit(void);
+int	cmd_env(void);
+int	cmd_unset(void);
 
 int	cmd_run(t_cmd *cmd);
 
-char	*fn_wrapper(t_cmd *cmd, int (*fn)());
+char	*fn_wrap_fd(t_cmd *cmd, int (*fn)());
 int	fn_execv(t_cmd *cmd);
 
-char	**str_parse(char *exp_input);
-
 // EXECUTION FUNCTIONS
-int	cmd_run(char *root, char *input);
-int	cmd_run_pipe(int cmdid);
-int	cmd_run_redirect(void);
+int	pipeln_exec(t_cmd *cmd);
+int	redirect_exec(void);
+
+int	signal_handler(void);
+
+char	**env_load(char *env[]);
+
+char	*prompt_load(char *curr, char **env);
+
+// DEV AND TESTS
+t_cmd	*ds_destroy(t_cmd *cmd);
+t_cmd	*ds_create(void);
+char	**vec_create(int size);
 
 # endif

@@ -1,6 +1,6 @@
 #include "../incl/minishell.h"
 
-int exit_run(void)
+int	cmd_unset(void)
 {
 	return (0);
 }

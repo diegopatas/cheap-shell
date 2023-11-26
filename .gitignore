@@ -2,14 +2,14 @@
 
 /obj
 # /tests
-/testera
-/testerb
 
 # ========= [ FILES ] ===========
 
+src/*_dev.c
+
 *.o
 *.a
-# *.md
+*.md
 *.out
 gdb*
 minishell

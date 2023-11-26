@@ -1,18 +1,23 @@
 #include "../incl/minishell.h"
-#include <stdlib.h>
 
 int	main(int argc, char *argv[], char *env[])
 {
-	char	*user_input;
+	// char	*prompt;
+	t_sh	*shell;
 
-	user_input = NULL;
-	(void)env;
+	// prompt = NULL;
+	shell = NULL;
+	signal_handler();
 	if (argc == 1) 
 	{
+		shell = shell_load();
+		ft_printf("s: %s\n", env[0]);
+		// shell->env = env_load(env);
 		while (1)
 		{
-			user_input = readline("minishell$ ");
-			if (cheapshell(user_input) != 0)
+			// prompt = prompt_load("cheap-shell: ", shell->env);
+			shell->input = readline("mini$: ");
+			if (shell_repl(shell) != 0)
 				break ;
 		}
 	}

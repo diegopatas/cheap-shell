@@ -1,6 +1,6 @@
 #include "../incl/minishell.h"
 
-int env_run(void)
+int	signal_handler(void)
 {
-	return (0);
+	return 0;
 }

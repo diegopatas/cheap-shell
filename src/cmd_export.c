@@ -1,6 +1,6 @@
 #include "../incl/minishell.h"
 
-int export_run(t_cmd *cmd)
+int	cmd_export(t_cmd *cmd)
 {
 	int i;
 
