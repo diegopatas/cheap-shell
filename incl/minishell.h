@@ -35,7 +35,7 @@ typedef struct s_cmd {
 	int  fd;
 }	t_cmd;
 
-int	cheapshell(char *input);
+int	repl(char *input);
 t_cmd	*ds_destroy(t_cmd *cmd);
 t_cmd	*ds_create(void);
 char	**vec_create(int size);

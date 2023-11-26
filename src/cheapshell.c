@@ -1,7 +1,7 @@
 #include "../incl/minishell.h"
 #include <stdlib.h>
 
-int	cheapshell(char *input)
+int	repl(char *input)
 {
 	char	**aux;
 	t_cmd	*cmd;

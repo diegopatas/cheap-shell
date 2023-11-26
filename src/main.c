@@ -12,7 +12,7 @@ int	main(int argc, char *argv[], char *env[])
 		while (1)
 		{
 			user_input = readline("minishell$ ");
-			if (cheapshell(user_input) != 0)
+			if (repl(user_input) != 0)
 				break ;
 		}
 	}
